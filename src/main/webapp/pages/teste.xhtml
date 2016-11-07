@@ -8,10 +8,10 @@
 </h:head>
 <h:body>
     <h:form>
-    	<p:inputText value="#{agenteMB.nome}">Nome: </p:inputText><br/>
-    	<p:inputText value="#{agenteMB.dtContratacao}">Data de contrataçâo: </p:inputText><br/>
-    	<p:inputText value="#{agenteMB.tempoServico}">Tempo de serviço: </p:inputText><br/>
-         <p:commandButton value="Pesquisar" action="#{agenteMB.chamar()}"></p:commandButton>
+    	<h:outputLabel value="#{agenteMB.nome}" /><br/>
+    	<h:outputText value="#{agenteMB.dtContratacao}" /><br/>
+    	<h:outputText value="#{agenteMB.tempoServico}" /><br/>
+         <p:commandButton value="Voltar" action="#{agenteMB.voltar()}"></p:commandButton>
     </h:form>
 </h:body>
 </html>
