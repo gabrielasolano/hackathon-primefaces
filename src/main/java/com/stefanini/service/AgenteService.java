@@ -16,7 +16,10 @@ public class AgenteService {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void incluir(Agente agente){
+    	
+    	if (agenteRepository == null) agenteRepository = new AgenteRepository();
     	agenteRepository.incluir(agente);
+    	
     }
 
 }

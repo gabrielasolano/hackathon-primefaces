@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+<!--     <h:form>
+	   	<p:inputText value="#{agenteMB.agente.nome}">Nome: </p:inputText><br/>
+    	<p:calendar value="#{agenteMB.agente.dtContratacao}">Data de contratação</p:calendar><br/>
+    	<p:inputText value="#{agenteMB.agente.tempoServico}">Tempo de serviço: </p:inputText><br/>
+      	<p:inputText value="#{agenteMB.agente.matricula}">Matrícula do agente: </p:inputText><br/>
+         
+         <p:commandButton value="Cadastrar" action="#{agenteMB.cadastrarAgente()}"></p:commandButton>
+
+    </h:form> -->
+    
+    <h:form>
+    <h:panelGrid columns="2" cellpadding="5" id="panel">
+ 
+        <p:outputLabel for="nome" value="Nome:" />
+        <p:inputMask id="nome" value="#{agenteMB.agente.nome}"/>
+        
+        <p:outputLabel for="data" value="Data de contratação: " />
+        <p:calendar id="data" value="#{agenteMB.agente.dtContratacao}"/>
+ 
+        <p:outputLabel for="tempoServico" value="Tempo de serviço:" />
+        <p:inputMask id="tempoServico" value="#{agenteMB.agente.tempoServico}"/>
+ 
+        <p:outputLabel for="matricula" value="Matrícula:" />
+        <p:inputMask id="matricula" value="#{agenteMB.agente.matricula}"/>
+ 
+        <p:commandButton value="Cadastrar" action="#{agenteMB.cadastrarAgente()}" update="panel"/>
+        <p:commandButton value="Voltar" action="#{agenteMB.voltar()}"/>
+    </h:panelGrid>
+    
+     </h:form>
+</h:body>
+</html>

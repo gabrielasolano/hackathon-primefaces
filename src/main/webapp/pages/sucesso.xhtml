@@ -8,12 +8,8 @@
 </h:head>
 <h:body>
     <h:form>
-    	<h:outputText value="#{agenteMB.agente.nome}" /><br/>
-    	<h:outputText value="#{agenteMB.agente.dtContratacao}">
- 			<f:convertDateTime pattern="dd/MM/yyyy" />
-    	</h:outputText><br/>
-    	<h:outputText value="#{agenteMB.agente.tempoServico}" /><br/>
-         <p:commandButton value="Voltar" action="#{agenteMB.voltar()}"></p:commandButton>         
+    	<h:outputText value="Inserido com sucesso!" /><br/>
+    	<h:button value="Voltar" outcome="/index" />        
     </h:form>
 </h:body>
 </html>

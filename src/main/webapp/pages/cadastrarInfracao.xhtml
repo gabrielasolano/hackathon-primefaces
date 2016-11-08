@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form>
+ 
+ 		<p:panel id="panel" header="Tipo de infração">
+        	<p:messages id="msgs" />
+ 
+	        <h:panelGrid columns="3" cellpadding="5">
+	            <p:outputLabel for="descricao" value="Descrição:" />
+	            <p:inputTextarea rows="6" cols="33" id="descricao" value="#{tipoInfracaoMB.tipoInfracao.descricaoTipoInfracao}" required="true" label="Descrição"/>
+	            <p:message for="descricao" display="icon" />
+	 
+	            <p:outputLabel for="valor" value="Valor:" />
+	            <p:inputText id="valor" value="#{tipoInfracaoMB.tipoInfracao.valor}" label="Valor" required="true">
+	                <f:validateLength minimum="2" />
+	            </p:inputText>
+	            <p:message for="valor" display="icon" />
+	 
+	        </h:panelGrid>
+ 
+        	<p:commandButton value="Salvar" update="panel" actionListener="#{tipoInfracaoMB.salvar()}" icon="ui-icon-check" />
+    	</p:panel>
+    	
+    	 <p:panel id="panelL" header="Local da infração">
+ 
+	        <h:panelGrid columns="3" cellpadding="5">
+	            <p:outputLabel for="descricaoL" value="Descrição:" />
+	            <p:inputTextarea rows="6" cols="33" id="descricaoL" value="#{localInfracaoMB.localInfracao.descricaoLocalInfracao}" label="Descrição"/>
+	            <p:message for="descricaoL" display="icon" />
+	 
+	            <p:outputLabel for="velocidade" value="Velocidade permitida:" />
+	            <p:inputText id="velocidade" value="#{localInfracaoMB.localInfracao.velocidadePermitida}" label="Velocidade permitida">
+	                <f:validateLength minimum="2" />
+	            </p:inputText>
+	            <p:message for="velocidade" display="icon" />
+	 
+	        </h:panelGrid>
+ 
+        	<p:commandButton value="Salvar" update="panelL" actionListener="#{localInfracaoMB.salvar()}" icon="ui-icon-check" />
+    	</p:panel>
+  
+
+
+	<!-- tipo de infracao, local infracao, agente, placa (fk) -->
+	<!-- velocidade -->
+
+    </h:form>
+</h:body>
+</html>

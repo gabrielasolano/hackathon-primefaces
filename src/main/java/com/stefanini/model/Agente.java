@@ -22,14 +22,16 @@ public class Agente implements java.io.Serializable {
 	private String nome;
 	private Date dtContratacao;
 	private Integer tempoServico;
+	private Integer matricula;
 
 	public Agente() {
 	}
 
-	public Agente(String nome, Date dtContratacao, Integer tempoServico) {
+	public Agente(String nome, Date dtContratacao, Integer tempoServico, Integer matricula) {
 		this.nome = nome;
 		this.dtContratacao = dtContratacao;
 		this.tempoServico = tempoServico;
+		this.matricula = matricula;
 	}
 
 	@Id
@@ -72,4 +74,12 @@ public class Agente implements java.io.Serializable {
 		this.tempoServico = tempoServico;
 	}
 
+	@Column(name = "matricula", unique = true, nullable = false)
+	public Integer getMatricula() {
+		return this.matricula;
+	}
+
+	public void setMatricula(Integer matricula) {
+		this.matricula = matricula;
+	}
 }

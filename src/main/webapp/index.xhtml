@@ -8,10 +8,24 @@
 </h:head>
 <h:body>
     <h:form>
-    	<p:inputText value="#{agenteMB.nome}">Nome: </p:inputText><br/>
-    	<p:inputText value="#{agenteMB.dtContratacao}">Data de contrataçâo: </p:inputText><br/>
-    	<p:inputText value="#{agenteMB.tempoServico}">Tempo de serviço: </p:inputText><br/>
-         <p:commandButton value="Pesquisar" action="#{agenteMB.chamar()}"></p:commandButton>
+      
+         <!-- Menu pagina inicial -->
+		<p:growl autoUpdate="true"/>
+	 
+	    	<p:panelMenu style="width:300px">
+	        <p:submenu label="Detran" >
+	            <p:submenu label="Agente" icon="ui-icon-extlink">
+	                <p:menuitem value="Cadastrar" outcome="/pages/cadastrarAgente" icon="ui-icon-cadastrar" />
+	                <p:menuitem value="Pesquisar" outcome="/pages/pesquisarAgente" icon="ui-icon-pesquisar" />
+	            </p:submenu>
+	           	<p:submenu label="Infrações" icon="ui-icon-extlink">
+	                <p:menuitem value="Cadastrar" outcome="/pages/cadastrarInfracao" icon="ui-icon-cadastrar" />
+	                <p:menuitem value="Pesquisar" outcome="/pages/pesquisarInfracao" icon="ui-icon-pesquisar" />
+	            </p:submenu>
+	        </p:submenu>
+	    </p:panelMenu>
+  
+         
     </h:form>
 </h:body>
 </html>

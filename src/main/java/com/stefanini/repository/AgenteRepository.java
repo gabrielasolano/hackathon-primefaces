@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.hibernate.hql.internal.ast.QuerySyntaxException;
+
 import com.stefanini.model.Agente;
 
 public class AgenteRepository {

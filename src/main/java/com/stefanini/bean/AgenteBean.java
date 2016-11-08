@@ -1,56 +1,65 @@
 package com.stefanini.bean;
 
-import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.stefanini.model.Agente;
 import com.stefanini.service.AgenteService;
 
 @Named("agenteMB")
 @SessionScoped
-public class AgenteBean {
+public class AgenteBean implements Serializable{
+		
+		private static final long serialVersionUID = 1L;
 
-	    @Inject
+		@Inject
 	    private AgenteService agenteService;
 	    
-	    private String nome;
-	    private String dtContratacao;
-	    private String tempoServico; 
-	   
-
-	    public String getNome() {
-			return nome;
+		@Inject
+	    private Agente agente;
+	    
+	    public Agente getAgente() {
+	    	if(agente == null){
+	    		agente = new Agente();
+	    	}
+			return agente;
 		}
 
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
-
-		public String getDtContratacao() {
-			return dtContratacao;
-		}
-
-
-		public void setDtContratacao(String dtContratacao) {
-			this.dtContratacao = dtContratacao;
-		}
-
-		public String getTempoServico() {
-			return tempoServico;
-		}
-
-		public void setTempoServico(String tempoServico) {
-			this.tempoServico = tempoServico;
+		public void setAgente(Agente agente) {
+			this.agente = agente;
 		}
 
 		public String chamar() {	
-			System.out.println(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + this.nome + " " + getNome());
-	        return "/pages/teste";
+	        return "/pages/teste.faces?faces-redirect=true"; //força a redirecionar para teste, mesmo se ocorrer erro
 	    }
 		
-		public String voltar() {	
-			System.out.println(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + this.nome + " " + getNome());
-	        return "../index";
-	    }
-
+		public String cadastrarAgente(){
+			
+			if(agenteService == null) agenteService = new AgenteService();
+			
+			/*Calcular tempo de serviço*/				
+			
+			try{
+				agenteService.incluir(getAgente());
+				
+			}catch(Exception e){		
+				return "/pages/erro.faces?faces-redirect=true";
+			}
+			
+			this.agente = new Agente();
+			return "/pages/sucesso.faces?faces-redirect=true";
+		}
+		
+		public String voltar(){
+			return "/index.faces?faces-redirect=true";
+			
+		}
+				
 	}
