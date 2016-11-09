@@ -1,6 +1,9 @@
 package com.stefanini.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -38,17 +41,33 @@ public class TipoinfracaoBean implements Serializable{
 		this.tipoInfracao = tipoInfracao;
 	}
 	
-	public void salvar(){
+	public String salvar(){
+		
+		if(tipoInfracaoService == null) tipoInfracaoService = new TipoinfracaoService();
 		
 		try{
 			tipoInfracaoService.incluir(getTipoInfracao());
-		}catch(Exception e){
-			FacesContext.getCurrentInstance().addMessage(null,
-	                new FacesMessage("Erro!"));
+			
+		}catch(Exception e){		
+			return "/pages/erro.faces?faces-redirect=true";
 		}
-	
+		
 		this.tipoInfracao = new Tipoinfracao();
-		FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage("Salvo com sucesso!"));	
+		return "/pages/sucesso.faces?faces-redirect=true";
+	}
+	
+	public String voltar(){
+		return "/index.faces?faces-redirect=true";
+		
+	}
+	
+	public Collection<Integer> todosTiposInfracoes(){
+		Collection<Tipoinfracao> colecao = tipoInfracaoService.listar();
+		Collection<Integer> idTipo = new ArrayList<Integer>();
+		for(Tipoinfracao tipo : colecao){
+			Integer descTipo = tipo.getIdTipoInfracao();
+			idTipo.add(descTipo);
+		}
+		return idTipo;
 	}
 }

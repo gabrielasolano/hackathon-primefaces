@@ -5,7 +5,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Collection;
+
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,9 +21,16 @@ import javax.persistence.Table;
 @Table(name = "tipoinfracao", catalog = "hackaton")
 public class Tipoinfracao implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer idTipoInfracao;
 	private String descricaoTipoInfracao;
 	private Double valor;
+	
+	@OneToMany
+	@JoinTable(name="tipoinfracao_infracoes",
+		joinColumns=@JoinColumn(name="tipoinfracao_idTipoInfracao"),
+		inverseJoinColumns=@JoinColumn(name="infracoes_idInfracao")) 
+	private Collection<Infracoes> infracoes;
 
 	public Tipoinfracao() {
 	}

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "infracoes", catalog = "hackaton")
 public class Infracoes implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer idInfracao;
 	private int idAgente;
 	private int idLocalInfracao;
@@ -98,3 +99,32 @@ public class Infracoes implements java.io.Serializable {
 	}
 
 }
+
+/*
+ * 
+ * 	@Entity
+	@Table(name = "DEPARTAMENTO")
+	public class Departamento implements Serializable {
+ 		private static final long serialVersionUID = 1L;
+ 		@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+ 		private Long id;
+ 		private String nome;
+ 
+ 		@OneToMany
+ 		@JoinTable(name="DPTO_FUNC",
+ 			joinColumns=@JoinColumn(name="dpto_id"),
+ 			inverseJoinColumns=@JoinColumn(name="func_id"))
+ 			private Collection<Funcionario> funcionarios;
+ 	}
+
+	@Entity
+	@Table(name = "FUNCIONARIO")
+	public class Funcionario implements Serializable {
+ 		private static final long serialVersionUID = 1L;
+ 		@Id
+ 		@GeneratedValue(strategy = GenerationType.IDENTITY)
+ 		private Long id;
+ 		private String nome;
+	}
+ * 
+ * */

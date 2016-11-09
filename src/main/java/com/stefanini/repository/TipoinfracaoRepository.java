@@ -1,9 +1,11 @@
 package com.stefanini.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.stefanini.model.Tipoinfracao;
 
@@ -25,7 +27,13 @@ public class TipoinfracaoRepository {
 	}
 
 	public List<Tipoinfracao> lista() {
-		return this.manager.createQuery("select c from denuncia c", Tipoinfracao.class)
+		return this.manager.createQuery("select c from Tipoinfracao c", Tipoinfracao.class)
 				.getResultList();
+	}
+	
+	public Collection<Tipoinfracao> listar() {
+		// TODO Auto-generated method stub
+		Query q = manager.createQuery("SELECT p FROM Tipoinfracao p");
+		return (Collection<Tipoinfracao>) q.getResultList();
 	}
 }

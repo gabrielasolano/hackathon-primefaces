@@ -8,44 +8,37 @@
 </h:head>
 <h:body>
     <h:form>
- 
- 		<p:panel id="panel" header="Tipo de infração">
-        	<p:messages id="msgs" />
- 
-	        <h:panelGrid columns="3" cellpadding="5">
-	            <p:outputLabel for="descricao" value="Descrição:" />
-	            <p:inputTextarea rows="6" cols="33" id="descricao" value="#{tipoInfracaoMB.tipoInfracao.descricaoTipoInfracao}" required="true" label="Descrição"/>
-	            <p:message for="descricao" display="icon" />
-	 
-	            <p:outputLabel for="valor" value="Valor:" />
-	            <p:inputText id="valor" value="#{tipoInfracaoMB.tipoInfracao.valor}" label="Valor" required="true">
-	                <f:validateLength minimum="2" />
-	            </p:inputText>
-	            <p:message for="valor" display="icon" />
-	 
-	        </h:panelGrid>
- 
-        	<p:commandButton value="Salvar" update="panel" actionListener="#{tipoInfracaoMB.salvar()}" icon="ui-icon-check" />
-    	</p:panel>
+ 		
+    	<p:panel id="panel" header="Infração">
+
+ 			<!-- Velocidade -->
+ 			<h:panelGrid>
+        		<p:outputLabel for="velocidade" value="Velocidade:" />
+        		<p:inputMask id="velocidade" value="#{infracoesMB.infracoes.velocidade}"/>
+	
+    		</h:panelGrid>
+    		
+    		<!-- Tipo de infração -->
+    		<h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="tipoInfracao" value="Tipo de infração: " />
+            <p:selectOneMenu id="tipoInfracao" style="width:150px" itemValue="#{tipoInfracaoMB.tipoInfracao}">
+                <f:selectItem itemLabel="Selecione" itemValue="#{tipoInfracaoMB.tipoInfracao}" noSelectionOption="true" />
+                <f:selectItems value="#{tipoInfracaoMB.todosTiposInfracoes()}" />
+            </p:selectOneMenu>
+        	</h:panelGrid>
+        	
+        	<!-- Agente -->
+        	<h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="agente" value="Agente: " />
+            <p:selectOneMenu id="agente" style="width:150px" itemValue="#{agenteMB.agente}">
+                <f:selectItem itemLabel="Selecione" itemValue="#{agenteMB.agente}" noSelectionOption="true" />
+                <f:selectItems value="#{agenteMB.todosAgentes()}" />
+            </p:selectOneMenu>
+        	</h:panelGrid>
     	
-    	 <p:panel id="panelL" header="Local da infração">
- 
-	        <h:panelGrid columns="3" cellpadding="5">
-	            <p:outputLabel for="descricaoL" value="Descrição:" />
-	            <p:inputTextarea rows="6" cols="33" id="descricaoL" value="#{localInfracaoMB.localInfracao.descricaoLocalInfracao}" label="Descrição"/>
-	            <p:message for="descricaoL" display="icon" />
-	 
-	            <p:outputLabel for="velocidade" value="Velocidade permitida:" />
-	            <p:inputText id="velocidade" value="#{localInfracaoMB.localInfracao.velocidadePermitida}" label="Velocidade permitida">
-	                <f:validateLength minimum="2" />
-	            </p:inputText>
-	            <p:message for="velocidade" display="icon" />
-	 
-	        </h:panelGrid>
- 
-        	<p:commandButton value="Salvar" update="panelL" actionListener="#{localInfracaoMB.salvar()}" icon="ui-icon-check" />
+			<p:commandButton value="Cadastrar Infração" update="panel" actionListener="#{infracoesMB.cadastrarInfracoes()}" icon="ui-icon-check" />    	
+    	
     	</p:panel>
-  
 
 
 	<!-- tipo de infracao, local infracao, agente, placa (fk) -->

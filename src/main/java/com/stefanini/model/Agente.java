@@ -1,12 +1,18 @@
 package com.stefanini.model;
 // Generated 07/11/2016 12:05:08 by Hibernate Tools 4.3.1.Final
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,12 +24,25 @@ import javax.persistence.TemporalType;
 @Table(name = "agente", catalog = "hackaton")
 public class Agente implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer idAgente;
 	private String nome;
 	private Date dtContratacao;
 	private Integer tempoServico;
 	private Integer matricula;
-
+	
+	@OneToMany
+	@JoinTable(name="agente_has_infracoes,",
+			joinColumns={@JoinColumn(name="agente_id", referencedColumnName="idAgente")},
+			inverseJoinColumns={@JoinColumn(name="infracoes_id", referencedColumnName="idInfracao")})
+	private List<Infracoes> infracoes;
+	
+/*	@OneToMany(mappedBy = "")
+	@JoinTable(name="agente_infracoes",
+		joinColumns=@JoinColumn(name="agente_idAgente"),
+		inverseJoinColumns=@JoinColumn(name="infracoes_idInfracao"))
+		private Collection<Infracoes> infracoes;
+*/
 	public Agente() {
 	}
 
@@ -82,4 +101,5 @@ public class Agente implements java.io.Serializable {
 	public void setMatricula(Integer matricula) {
 		this.matricula = matricula;
 	}
+	
 }

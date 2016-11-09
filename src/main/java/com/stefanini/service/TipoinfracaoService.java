@@ -1,5 +1,7 @@
 package com.stefanini.service;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -16,6 +18,10 @@ public class TipoinfracaoService {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void incluir(Tipoinfracao tipoInfracao){
     	tipoInfracaoRepository.incluir(tipoInfracao);
+    }
+    
+    public Collection<Tipoinfracao> listar(){
+    	return tipoInfracaoRepository.lista();
     }
 	
 }

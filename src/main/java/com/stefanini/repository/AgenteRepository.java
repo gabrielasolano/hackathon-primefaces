@@ -27,7 +27,7 @@ public class AgenteRepository {
 		}
 
 		public List<Agente> lista() {
-			return this.manager.createQuery("select c from agente c", Agente.class)
+			return this.manager.createQuery("select c from Agente c", Agente.class)
 					.getResultList();
 		}
 	}
