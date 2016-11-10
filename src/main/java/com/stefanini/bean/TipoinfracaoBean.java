@@ -61,6 +61,10 @@ public class TipoinfracaoBean implements Serializable{
 		
 	}
 	
+	public Collection<Tipoinfracao> listar(){
+		return this.tipoInfracaoService.listar();
+	}
+	
 	public Collection<Integer> todosTiposInfracoes(){
 		Collection<Tipoinfracao> colecao = tipoInfracaoService.listar();
 		Collection<Integer> idTipo = new ArrayList<Integer>();

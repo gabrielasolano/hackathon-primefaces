@@ -22,7 +22,7 @@ public class TipoinfracaoService {
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Collection<Tipoinfracao> listar(){
-    	return tipoInfracaoRepository.lista();
+    	return tipoInfracaoRepository.listar();
     }
 	
 }

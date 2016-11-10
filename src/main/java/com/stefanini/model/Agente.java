@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "agente", catalog = "hackaton")
-public class Agente implements java.io.Serializable {
+public class Agente implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Integer idAgente;
@@ -32,21 +32,6 @@ public class Agente implements java.io.Serializable {
 	private Integer tempoServico;
 	private Integer matricula;
 	
-	@OneToMany(mappedBy="agente", cascade = {CascadeType.MERGE})
-	private List<Infracoes> infracoes;
-	
-/*	@OneToMany
-	@JoinTable(name="agente_has_infracoes,",
-			joinColumns={@JoinColumn(name="agente_id", referencedColumnName="idAgente")},
-			inverseJoinColumns={@JoinColumn(name="infracoes_id", referencedColumnName="idInfracao")})
-	private List<Infracoes> infracoes;*/
-	
-/*	@OneToMany(mappedBy = "")
-	@JoinTable(name="agente_infracoes",
-		joinColumns=@JoinColumn(name="agente_idAgente"),
-		inverseJoinColumns=@JoinColumn(name="infracoes_idInfracao"))
-		private Collection<Infracoes> infracoes;
-*/
 	public Agente() {
 	}
 
@@ -59,7 +44,6 @@ public class Agente implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "idAgente", unique = true, nullable = false)
 	public Integer getIdAgente() {
 		return this.idAgente;
@@ -105,5 +89,4 @@ public class Agente implements java.io.Serializable {
 	public void setMatricula(Integer matricula) {
 		this.matricula = matricula;
 	}
-	
 }

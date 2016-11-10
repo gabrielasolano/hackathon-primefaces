@@ -2,19 +2,14 @@ package com.stefanini.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.stefanini.model.Agente;
-import com.stefanini.model.Tipoinfracao;
 import com.stefanini.service.AgenteService;
 
 @Named("agenteMB")
@@ -28,6 +23,8 @@ public class AgenteBean implements Serializable{
 	    
 		@Inject
 	    private Agente agente;
+		
+		private List<Agente> lista = new ArrayList<Agente>();
 	    
 	    public Agente getAgente() {
 	    	if(agente == null){
@@ -66,6 +63,12 @@ public class AgenteBean implements Serializable{
 			
 		}
 		
+		public Collection<Agente> listar(){
+			/*lista.addAll(this.agenteService.listar());*/
+			
+			return this.agenteService.listar();
+		}
+		
 		public List<Integer> todosAgentes(){
 			Collection<Agente> colecao = agenteService.listar();
 			Collection<Integer> matricula = new ArrayList<Integer>();
@@ -75,7 +78,13 @@ public class AgenteBean implements Serializable{
 			}
 			return (List<Integer>) matricula;
 		}
-		
-		//Map<String, String>
+
+		public List<Agente> getLista() {
+			return lista;
+		}
+
+		public void setLista(List<Agente> lista) {
+			this.lista = lista;
+		}
 				
 	}

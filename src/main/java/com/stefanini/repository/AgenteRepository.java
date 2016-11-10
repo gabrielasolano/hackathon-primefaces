@@ -1,11 +1,11 @@
 package com.stefanini.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-
-import org.hibernate.hql.internal.ast.QuerySyntaxException;
+import javax.persistence.Query;
 
 import com.stefanini.model.Agente;
 
@@ -29,5 +29,10 @@ public class AgenteRepository {
 		public List<Agente> lista() {
 			return this.manager.createQuery("select c from Agente c", Agente.class)
 					.getResultList();
+		}
+		
+		public Collection<Agente> listar(){
+			Query q = this.manager.createQuery("SELECT t FROM Agente t");
+			return (Collection<Agente>) q.getResultList();
 		}
 	}

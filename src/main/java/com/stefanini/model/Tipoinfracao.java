@@ -34,8 +34,8 @@ public class Tipoinfracao implements java.io.Serializable {
 		inverseJoinColumns=@JoinColumn(name="infracoes_idInfracao")) 
 	private Collection<Infracoes> infracoes;*/
 
-	@OneToMany(mappedBy="tipoInfracao", cascade = {CascadeType.MERGE})
-	private List<Infracoes> infracoes;
+/*	@OneToMany(mappedBy="tipoInfracao", cascade = {CascadeType.MERGE})
+	private List<Infracoes> infracoes;*/
 	
 	public Tipoinfracao() {
 	}

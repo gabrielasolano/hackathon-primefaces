@@ -1,19 +1,12 @@
 package com.stefanini.model;
 // Generated 07/11/2016 12:05:08 by Hibernate Tools 4.3.1.Final
 
-import javax.persistence.CascadeType;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-
-import java.util.Collection;
-import java.util.List;
-
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,14 +21,6 @@ public class Localinfracao implements java.io.Serializable {
 	private String descricaoLocalInfracao;
 	private Double velocidadePermitida;
 	
-/*	@OneToMany(mappedBy="localInfracao", cascade = {CascadeType.MERGE})
-	private List<Infracoes> infracoes;*/
-	
-/*	@OneToMany
-	@JoinTable(name="localinfracao_infracoes",
-		joinColumns=@JoinColumn(name="localinfracao_idLocalInfracao"),
-		inverseJoinColumns=@JoinColumn(name="infracoes_idInfracao"))
-		private Collection<Infracoes> infracoes;*/
 
 	public Localinfracao() {
 	}
@@ -47,7 +32,6 @@ public class Localinfracao implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "idLocalInfracao", unique = true, nullable = false)
 	public Integer getIdLocalInfracao() {
 		return this.idLocalInfracao;

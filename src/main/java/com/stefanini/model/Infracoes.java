@@ -21,60 +21,51 @@ public class Infracoes implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int idLocalInfracao;
-	private String placa;
-	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "idInfracao", unique = true, nullable = false)
+	@Column(name = "idInfracao", unique = true, nullable = false)	
 	private Integer idInfracao;
-
-	@ManyToOne(cascade = { CascadeType.MERGE })
+	
+	@ManyToOne()
 	@JoinColumn(name = "idAgente")
-	private Agente agente;
+	private Agente agente = new Agente();
 
-/*	@ManyToOne(cascade = { CascadeType.MERGE })
-	@JoinColumn(name = "idLocalInfracao")
-	private Localinfracao localInfracao;*/
-
-	@ManyToOne(cascade = { CascadeType.MERGE })
+	@ManyToOne()
 	@JoinColumn(name = "idTipoInfracao")
-	private Tipoinfracao tipoInfracao;
+	private Tipoinfracao tipoInfracao = new Tipoinfracao();
+	
+/*	@ManyToOne
+	@JoinColumn(name = "idLocalInfracao")
+	private Localinfracao localInfracao = new Localinfracao();*/
+	@Column(name = "idLocalInfracao")
+	private int idLocalInfracao;
 
-/*	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name="placa")
-	private Veiculos veiculo;*/
+	public int getIdLocalInfracao() {
+		return idLocalInfracao;
+	}
+
+	public void setIdLocalInfracao(int idLocalInfracao) {
+		this.idLocalInfracao = idLocalInfracao;
+	}
+
+	@Column(name = "placa", nullable = false, length = 7)
+	private String placa;
 	
 	@Column(name = "velocidade")
 	private Integer velocidade;
 
-	public Infracoes() {
+	public Infracoes(){
+		
 	}
-	
-	public Infracoes(Agente agente, int idLocalInfracao, Tipoinfracao tipoInfracao, String placa,
-			Integer velocidade) {
+
+	public Infracoes(Agente agente, Tipoinfracao tipoInfracao, int localInfracao, Integer idInfracao,
+			String placa, Integer velocidade) {
 		this.agente = agente;
-		this.idLocalInfracao = idLocalInfracao;
 		this.tipoInfracao = tipoInfracao;
-		this.placa = placa;
-		this.velocidade = velocidade;
-	}
-
-/*	public Infracoes(Agente agente, Localinfracao localInfracao, Tipoinfracao tipoInfracao, String placa,
-			Integer velocidade) {
-		this.agente = agente;
-		this.localInfracao = localInfracao;
-		this.tipoInfracao = tipoInfracao;
-		this.placa = placa;
-		this.velocidade = velocidade;
-	}*/
-
-	public Integer getIdInfracao() {
-		return this.idInfracao;
-	}
-
-	public void setIdInfracao(Integer idInfracao) {
+		this.idLocalInfracao = localInfracao;
 		this.idInfracao = idInfracao;
+		this.placa = placa;
+		this.velocidade = velocidade;
 	}
 
 	public Agente getAgente() {
@@ -84,14 +75,13 @@ public class Infracoes implements java.io.Serializable {
 	public void setAgente(Agente agente) {
 		this.agente = agente;
 	}
-	
-	@Column(name = "idLocalInfracao", nullable = false)
-	public int getIdLocalInfracao() {
-		return this.idLocalInfracao;
+
+	public Tipoinfracao getTipoInfracao() {
+		return tipoInfracao;
 	}
 
-	public void setIdLocalInfracao(int idLocalInfracao) {
-		this.idLocalInfracao = idLocalInfracao;
+	public void setTipoInfracao(Tipoinfracao tipoInfracao) {
+		this.tipoInfracao = tipoInfracao;
 	}
 
 /*	public Localinfracao getLocalInfracao() {
@@ -102,147 +92,28 @@ public class Infracoes implements java.io.Serializable {
 		this.localInfracao = localInfracao;
 	}*/
 
-	public Tipoinfracao getTipoInfracao() {
-		return tipoInfracao;
-	}
-
-	public void setTipoInfracao(Tipoinfracao tipoInfracao) {
-		this.tipoInfracao = tipoInfracao;
-	}
-	
-	@Column(name = "placa", nullable = false, length = 7)
-	public String getPlaca() {
-		return this.placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
-/*	public String getPlaca() {
-		return this.placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}*/
-
-	public Integer getVelocidade() {
-		return this.velocidade;
-	}
-
-	public void setVelocidade(Integer velocidade) {
-		this.velocidade = velocidade;
-	}
-	/*private Integer idInfracao;
-	private int idAgente;
-	private int idLocalInfracao;
-	private int idTipoInfracao;
-	private String placa;
-	private Integer velocidade;
-
-	public Infracoes() {
-	}
-
-	public Infracoes(int idAgente, int idLocalInfracao, int idTipoInfracao, String placa) {
-		this.idAgente = idAgente;
-		this.idLocalInfracao = idLocalInfracao;
-		this.idTipoInfracao = idTipoInfracao;
-		this.placa = placa;
-	}
-
-	public Infracoes(int idAgente, int idLocalInfracao, int idTipoInfracao, String placa, Integer velocidade) {
-		this.idAgente = idAgente;
-		this.idLocalInfracao = idLocalInfracao;
-		this.idTipoInfracao = idTipoInfracao;
-		this.placa = placa;
-		this.velocidade = velocidade;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "idInfracao", unique = true, nullable = false)
 	public Integer getIdInfracao() {
-		return this.idInfracao;
+		return idInfracao;
 	}
 
 	public void setIdInfracao(Integer idInfracao) {
 		this.idInfracao = idInfracao;
 	}
 
-	@Column(name = "idAgente", nullable = false)
-	public int getIdAgente() {
-		return this.idAgente;
-	}
-
-	public void setIdAgente(int idAgente) {
-		this.idAgente = idAgente;
-	}
-
-	@Column(name = "idLocalInfracao", nullable = false)
-	public int getIdLocalInfracao() {
-		return this.idLocalInfracao;
-	}
-
-	public void setIdLocalInfracao(int idLocalInfracao) {
-		this.idLocalInfracao = idLocalInfracao;
-	}
-
-	@Column(name = "idTipoInfracao", nullable = false)
-	public int getIdTipoInfracao() {
-		return this.idTipoInfracao;
-	}
-
-	public void setIdTipoInfracao(int idTipoInfracao) {
-		this.idTipoInfracao = idTipoInfracao;
-	}
-
-	@Column(name = "placa", nullable = false, length = 7)
 	public String getPlaca() {
-		return this.placa;
+		return placa;
 	}
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
 
-	@Column(name = "velocidade")
 	public Integer getVelocidade() {
-		return this.velocidade;
+		return velocidade;
 	}
 
 	public void setVelocidade(Integer velocidade) {
 		this.velocidade = velocidade;
-	}*/
+	}
 
 }
-
-/*
- * 
- * 	@Entity
-	@Table(name = "DEPARTAMENTO")
-	public class Departamento implements Serializable {
- 		private static final long serialVersionUID = 1L;
- 		@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
- 		private Long id;
- 		private String nome;
- 
- 		@OneToMany
- 		@JoinTable(name="DPTO_FUNC",
- 			joinColumns=@JoinColumn(name="dpto_id"),
- 			inverseJoinColumns=@JoinColumn(name="func_id"))
- 			private Collection<Funcionario> funcionarios;
- 	}
-
-	@Entity
-	@Table(name = "FUNCIONARIO")
-	public class Funcionario implements Serializable {
- 		private static final long serialVersionUID = 1L;
- 		@Id
- 		@GeneratedValue(strategy = GenerationType.IDENTITY)
- 		private Long id;
- 		private String nome;
-	}
- * 
- * */

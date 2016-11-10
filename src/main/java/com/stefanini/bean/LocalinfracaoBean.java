@@ -1,6 +1,7 @@
 package com.stefanini.bean;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -33,17 +34,21 @@ public class LocalinfracaoBean implements Serializable{
 	public void setLocalInfracao(Localinfracao localInfracao) {
 		this.localInfracao = localInfracao;
 	}
+	
+	public Collection<Localinfracao> listar(){
+		return this.localInfracaoService.listar();
+	}
 
-	public void salvar(){
+	public String salvar(){
 		
 		try{
 			localInfracaoService.incluir(getLocalInfracao());
-		}catch(Exception e){
-			FacesContext.getCurrentInstance().addMessage(null,
-	                new FacesMessage("Erro!"));
+			
+		}catch(Exception e){		
+			return "/pages/erro.faces?faces-redirect=true";
 		}
-	
-		FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage("Salvo com sucesso!"));	
+		
+		this.localInfracao = new Localinfracao();
+		return "/pages/sucesso.faces?faces-redirect=true";
 	}
 }

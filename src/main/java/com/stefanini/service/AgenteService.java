@@ -26,14 +26,6 @@ public class AgenteService {
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Collection<Agente> listar(){
-    	return agenteRepository.lista();
+    	return agenteRepository.listar();
     }
-    
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Agente buscarID(Integer id) {
-
-		return agenteRepository.busca(id);
-
-	}
-
 }
