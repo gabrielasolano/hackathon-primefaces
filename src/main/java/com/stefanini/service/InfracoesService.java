@@ -15,9 +15,6 @@ public class InfracoesService {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void incluir(Infracoes infracoes){
-    	
-    	if (infracoesRepository == null) infracoesRepository = new InfracoesRepository();
     	infracoesRepository.incluir(infracoes);
-    	
     }
 }

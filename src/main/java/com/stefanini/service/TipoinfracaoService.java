@@ -20,6 +20,7 @@ public class TipoinfracaoService {
     	tipoInfracaoRepository.incluir(tipoInfracao);
     }
     
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Collection<Tipoinfracao> listar(){
     	return tipoInfracaoRepository.lista();
     }

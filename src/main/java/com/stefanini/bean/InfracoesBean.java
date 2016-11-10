@@ -1,6 +1,9 @@
 package com.stefanini.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -19,9 +22,22 @@ public class InfracoesBean implements Serializable{
 	
 	@Inject
     private InfracoesService infracoesService;
+	
+	@Inject
+	private AgenteService agenteService;
     
 	@Inject
     private Infracoes infracoes;
+	
+	public List<Integer> todosAgentes(){
+		Collection<Agente> colecao = agenteService.listar();
+		Collection<Integer> matricula = new ArrayList<Integer>();
+		for(Agente ag : colecao){
+			Integer mat = ag.getMatricula();
+			matricula.add(mat);
+		}
+		return (List<Integer>) matricula;
+	}
 
 	public Infracoes getInfracoes() {
 		if(infracoes == null){

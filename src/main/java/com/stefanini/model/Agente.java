@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,11 +32,14 @@ public class Agente implements java.io.Serializable {
 	private Integer tempoServico;
 	private Integer matricula;
 	
-	@OneToMany
+	@OneToMany(mappedBy="agente", cascade = {CascadeType.MERGE})
+	private List<Infracoes> infracoes;
+	
+/*	@OneToMany
 	@JoinTable(name="agente_has_infracoes,",
 			joinColumns={@JoinColumn(name="agente_id", referencedColumnName="idAgente")},
 			inverseJoinColumns={@JoinColumn(name="infracoes_id", referencedColumnName="idInfracao")})
-	private List<Infracoes> infracoes;
+	private List<Infracoes> infracoes;*/
 	
 /*	@OneToMany(mappedBy = "")
 	@JoinTable(name="agente_infracoes",

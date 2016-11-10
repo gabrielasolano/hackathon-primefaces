@@ -20,14 +20,20 @@ public class AgenteService {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void incluir(Agente agente){
-    	
-    	if (agenteRepository == null) agenteRepository = new AgenteRepository();
     	agenteRepository.incluir(agente);
     	
     }
     
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Collection<Agente> listar(){
     	return agenteRepository.lista();
     }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Agente buscarID(Integer id) {
+
+		return agenteRepository.busca(id);
+
+	}
 
 }

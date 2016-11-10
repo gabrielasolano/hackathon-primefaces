@@ -1,12 +1,14 @@
 package com.stefanini.model;
 // Generated 07/11/2016 12:05:08 by Hibernate Tools 4.3.1.Final
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,12 +28,15 @@ public class Tipoinfracao implements java.io.Serializable {
 	private String descricaoTipoInfracao;
 	private Double valor;
 	
-	@OneToMany
+/*	@OneToMany
 	@JoinTable(name="tipoinfracao_infracoes",
 		joinColumns=@JoinColumn(name="tipoinfracao_idTipoInfracao"),
 		inverseJoinColumns=@JoinColumn(name="infracoes_idInfracao")) 
-	private Collection<Infracoes> infracoes;
+	private Collection<Infracoes> infracoes;*/
 
+	@OneToMany(mappedBy="tipoInfracao", cascade = {CascadeType.MERGE})
+	private List<Infracoes> infracoes;
+	
 	public Tipoinfracao() {
 	}
 

@@ -5,7 +5,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,7 +20,121 @@ import javax.persistence.Table;
 public class Infracoes implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private int idLocalInfracao;
+	private String placa;
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "idInfracao", unique = true, nullable = false)
 	private Integer idInfracao;
+
+	@ManyToOne(cascade = { CascadeType.MERGE })
+	@JoinColumn(name = "idAgente")
+	private Agente agente;
+
+/*	@ManyToOne(cascade = { CascadeType.MERGE })
+	@JoinColumn(name = "idLocalInfracao")
+	private Localinfracao localInfracao;*/
+
+	@ManyToOne(cascade = { CascadeType.MERGE })
+	@JoinColumn(name = "idTipoInfracao")
+	private Tipoinfracao tipoInfracao;
+
+/*	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="placa")
+	private Veiculos veiculo;*/
+	
+	@Column(name = "velocidade")
+	private Integer velocidade;
+
+	public Infracoes() {
+	}
+	
+	public Infracoes(Agente agente, int idLocalInfracao, Tipoinfracao tipoInfracao, String placa,
+			Integer velocidade) {
+		this.agente = agente;
+		this.idLocalInfracao = idLocalInfracao;
+		this.tipoInfracao = tipoInfracao;
+		this.placa = placa;
+		this.velocidade = velocidade;
+	}
+
+/*	public Infracoes(Agente agente, Localinfracao localInfracao, Tipoinfracao tipoInfracao, String placa,
+			Integer velocidade) {
+		this.agente = agente;
+		this.localInfracao = localInfracao;
+		this.tipoInfracao = tipoInfracao;
+		this.placa = placa;
+		this.velocidade = velocidade;
+	}*/
+
+	public Integer getIdInfracao() {
+		return this.idInfracao;
+	}
+
+	public void setIdInfracao(Integer idInfracao) {
+		this.idInfracao = idInfracao;
+	}
+
+	public Agente getAgente() {
+		return agente;
+	}
+
+	public void setAgente(Agente agente) {
+		this.agente = agente;
+	}
+	
+	@Column(name = "idLocalInfracao", nullable = false)
+	public int getIdLocalInfracao() {
+		return this.idLocalInfracao;
+	}
+
+	public void setIdLocalInfracao(int idLocalInfracao) {
+		this.idLocalInfracao = idLocalInfracao;
+	}
+
+/*	public Localinfracao getLocalInfracao() {
+		return localInfracao;
+	}
+
+	public void setLocalInfracao(Localinfracao localInfracao) {
+		this.localInfracao = localInfracao;
+	}*/
+
+	public Tipoinfracao getTipoInfracao() {
+		return tipoInfracao;
+	}
+
+	public void setTipoInfracao(Tipoinfracao tipoInfracao) {
+		this.tipoInfracao = tipoInfracao;
+	}
+	
+	@Column(name = "placa", nullable = false, length = 7)
+	public String getPlaca() {
+		return this.placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+/*	public String getPlaca() {
+		return this.placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}*/
+
+	public Integer getVelocidade() {
+		return this.velocidade;
+	}
+
+	public void setVelocidade(Integer velocidade) {
+		this.velocidade = velocidade;
+	}
+	/*private Integer idInfracao;
 	private int idAgente;
 	private int idLocalInfracao;
 	private int idTipoInfracao;
@@ -96,7 +214,7 @@ public class Infracoes implements java.io.Serializable {
 
 	public void setVelocidade(Integer velocidade) {
 		this.velocidade = velocidade;
-	}
+	}*/
 
 }
 

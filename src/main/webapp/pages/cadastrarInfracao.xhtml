@@ -21,8 +21,8 @@
     		<!-- Tipo de infração -->
     		<h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="tipoInfracao" value="Tipo de infração: " />
-            <p:selectOneMenu id="tipoInfracao" style="width:150px" itemValue="#{tipoInfracaoMB.tipoInfracao}">
-                <f:selectItem itemLabel="Selecione" itemValue="#{tipoInfracaoMB.tipoInfracao}" noSelectionOption="true" />
+            <p:selectOneMenu id="tipoInfracao" style="width:150px" itemValue="#{infracoesMB.infracoes.tipoInfracao}">
+                <f:selectItem itemLabel="Selecione" itemValue="#{infracoesMB.infracoes.tipoInfracao}" noSelectionOption="true" />
                 <f:selectItems value="#{tipoInfracaoMB.todosTiposInfracoes()}" />
             </p:selectOneMenu>
         	</h:panelGrid>
@@ -30,11 +30,25 @@
         	<!-- Agente -->
         	<h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="agente" value="Agente: " />
-            <p:selectOneMenu id="agente" style="width:150px" itemValue="#{agenteMB.agente}">
-                <f:selectItem itemLabel="Selecione" itemValue="#{agenteMB.agente}" noSelectionOption="true" />
-                <f:selectItems value="#{agenteMB.todosAgentes()}" />
+            <p:selectOneMenu id="agente" style="width:150px" itemValue="#{infracoesMB.infracoes.agente}">
+                <f:selectItem itemLabel="Selecione" itemValue="#{infracoesMB.infracoes.agente}" noSelectionOption="true" />
+                <f:selectItems value="#{infracoesMB.todosAgentes()}" />
             </p:selectOneMenu>
         	</h:panelGrid>
+        	
+        	<!-- Teste de agente -->
+        	Digite CPF do agente:
+		<p:inputText id="agenteCPF" value="#{infracoesMB.cpfAgente}" />
+
+			<p:commandButton action="#{infracaoBean.buscarAgenteID()}"
+				update="agenteNome" value="pesquisar">
+				<f:ajax event="click" execute="agenteCPF" />
+			</p:commandButton>
+
+			<h:panelGroup>
+
+				<p:outputLabel value="#{infracoesBean.agente.nome}" id="agenteNome" />
+			</h:panelGroup>
     	
 			<p:commandButton value="Cadastrar Infração" update="panel" actionListener="#{infracoesMB.cadastrarInfracoes()}" icon="ui-icon-check" />    	
     	
