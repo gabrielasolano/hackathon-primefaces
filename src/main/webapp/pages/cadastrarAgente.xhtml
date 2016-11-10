@@ -18,23 +18,26 @@
     </h:form> -->
     
     <h:form>
-    <h:panelGrid columns="2" cellpadding="5" id="panel">
+    <p:panel id="panel" header="Agente">
+    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+    	<h:panelGrid columns="2" cellpadding="5" >
+    
+        	<label>Nome: </label>
+        	<p:inputText id="nome" value="#{agenteMB.agente.nome}"/>
+    	
+    		<label>Data de contratação: </label>
+    		<p:inputText id="data" value="#{agenteMB.agente.dtContratacao}"/>
+
+    		<label>Tempo de serviço: </label>
+    		<p:inputText id="tempoServico" value="#{agenteMB.agente.tempoServico}"/>
+    		 
+    		<label>Matrícula: </label>
+    		<p:inputText id="matricula" value="#{agenteMB.agente.matricula}"/>
  
-        <p:outputLabel for="nome" value="Nome:" />
-        <p:inputMask id="nome" value="#{agenteMB.agente.nome}"/>
-        
-        <p:outputLabel for="data" value="Data de contratação: " />
-        <p:calendar id="data" value="#{agenteMB.agente.dtContratacao}"/>
- 
-        <p:outputLabel for="tempoServico" value="Tempo de serviço:" />
-        <p:inputMask id="tempoServico" value="#{agenteMB.agente.tempoServico}"/>
- 
-        <p:outputLabel for="matricula" value="Matrícula:" />
-        <p:inputMask id="matricula" value="#{agenteMB.agente.matricula}"/>
- 
-        <p:commandButton value="Cadastrar" action="#{agenteMB.cadastrarAgente()}" update="panel"/>
+        <p:commandButton value="Cadastrar" actionListener="#{agenteMB.cadastrarAgente()}" update="panel"/>
         <p:commandButton value="Voltar" action="#{agenteMB.voltar()}"/>
     </h:panelGrid>
+    </p:panel>
     
      </h:form>
 </h:body>

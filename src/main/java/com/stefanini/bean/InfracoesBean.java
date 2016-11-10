@@ -100,20 +100,8 @@ public class InfracoesBean implements Serializable{
 			}
 		}
 		
-		/*Tem que voltar um objeto! Mudar no model Infracoes*/
-		//this.infracoes.setIdLocalInfracao(0);
-		
-		infracoesService.incluir(this.infracoes);
-		/*if(infracoesService == null) infracoesService = new InfracoesService();		
-		this.infracoes.setPlaca("placa");
-		
-		try{
-			infracoesService.incluir(getInfracoes());
-			
-		}catch(Exception e){		
-			return "/pages/erro.faces?faces-redirect=true";
-		}*/
-		
+		this.infracoes.setLocalInfracao(local);
+		infracoesService.incluir(this.infracoes);		
 		this.infracoes = new Infracoes();
 		return "/pages/sucesso.faces?faces-redirect=true";
 	}

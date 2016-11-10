@@ -34,19 +34,19 @@ public class Infracoes implements java.io.Serializable {
 	@JoinColumn(name = "idTipoInfracao")
 	private Tipoinfracao tipoInfracao = new Tipoinfracao();
 	
-/*	@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "idLocalInfracao")
-	private Localinfracao localInfracao = new Localinfracao();*/
-	@Column(name = "idLocalInfracao")
+	private Localinfracao localInfracao = new Localinfracao();
+/*	@Column(name = "idLocalInfracao")
 	private int idLocalInfracao;
-
-	public int getIdLocalInfracao() {
+*/
+/*	public int getIdLocalInfracao() {
 		return idLocalInfracao;
 	}
 
 	public void setIdLocalInfracao(int idLocalInfracao) {
 		this.idLocalInfracao = idLocalInfracao;
-	}
+	}*/
 
 	@Column(name = "placa", nullable = false, length = 7)
 	private String placa;
@@ -58,11 +58,11 @@ public class Infracoes implements java.io.Serializable {
 		
 	}
 
-	public Infracoes(Agente agente, Tipoinfracao tipoInfracao, int localInfracao, Integer idInfracao,
+	public Infracoes(Agente agente, Tipoinfracao tipoInfracao, Localinfracao localInfracao, Integer idInfracao,
 			String placa, Integer velocidade) {
 		this.agente = agente;
 		this.tipoInfracao = tipoInfracao;
-		this.idLocalInfracao = localInfracao;
+		this.localInfracao = localInfracao;
 		this.idInfracao = idInfracao;
 		this.placa = placa;
 		this.velocidade = velocidade;
@@ -82,6 +82,14 @@ public class Infracoes implements java.io.Serializable {
 
 	public void setTipoInfracao(Tipoinfracao tipoInfracao) {
 		this.tipoInfracao = tipoInfracao;
+	}
+	
+	public Localinfracao getLocalInfracao() {
+		return localInfracao;
+	}
+
+	public void setLocalInfracao(Localinfracao localInfracao) {
+		this.localInfracao = localInfracao;
 	}
 
 /*	public Localinfracao getLocalInfracao() {

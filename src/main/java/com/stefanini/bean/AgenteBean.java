@@ -38,14 +38,14 @@ public class AgenteBean implements Serializable{
 		}
 
 		public String chamar() {	
-	        return "/pages/teste.faces?faces-redirect=true"; //força a redirecionar para teste, mesmo se ocorrer erro
+	        return "/pages/teste.faces?faces-redirect=true"; //forï¿½a a redirecionar para teste, mesmo se ocorrer erro
 	    }
 		
 		public String cadastrarAgente(){
 			
 			if(agenteService == null) agenteService = new AgenteService();
 			
-			/*Calcular tempo de serviço*/				
+			/*Calcular tempo de serviï¿½o*/				
 			
 			try{
 				agenteService.incluir(getAgente());
