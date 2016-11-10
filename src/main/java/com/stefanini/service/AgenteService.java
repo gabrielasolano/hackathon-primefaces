@@ -25,6 +25,12 @@ public class AgenteService {
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void alterar(Agente agente){
+    	agenteRepository.altera(agente);
+    	
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Collection<Agente> listar(){
     	return agenteRepository.listar();
     }

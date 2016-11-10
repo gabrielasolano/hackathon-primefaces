@@ -22,6 +22,11 @@ public class AgenteRepository {
 			this.manager.merge(agente);
 		}
 
+		public void remove(Agente agente) {
+			
+			this.manager.remove(agente);
+		}
+		
 		public Agente busca(Integer id) {
 			return this.manager.find(Agente.class, id);
 		}
