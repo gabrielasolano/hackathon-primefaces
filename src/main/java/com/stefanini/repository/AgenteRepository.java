@@ -22,9 +22,8 @@ public class AgenteRepository {
 			this.manager.merge(agente);
 		}
 
-		public void remove(Agente agente) {
-			
-			this.manager.remove(agente);
+		public void remove(Integer id) {
+			this.manager.remove(manager.find(Agente.class, id));
 		}
 		
 		public Agente busca(Integer id) {
@@ -37,7 +36,7 @@ public class AgenteRepository {
 		}
 		
 		public Collection<Agente> listar(){
-			Query q = this.manager.createQuery("SELECT t FROM Agente t");
+			Query q = this.manager.createQuery("select c from Agente c");
 			return (Collection<Agente>) q.getResultList();
 		}
 	}

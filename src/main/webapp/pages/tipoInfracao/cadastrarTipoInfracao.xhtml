@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form>
+ 		
+ 		<p:panel id="panel" header="Tipo de infração">
+        	<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+ 
+	        <h:panelGrid columns="2" cellpadding="5">
+	            <label>Descrição: </label>
+	            <p:inputTextarea rows="6" cols="33" id="descricao" value="#{tipoInfracaoMB.tipoInfracao.descricaoTipoInfracao}" label="Descrição" />
+	 
+	            <label>Valor: </label>
+	            <p:inputText id="valor" value="#{tipoInfracaoMB.tipoInfracao.valor}" label="Valor"/>
+	            
+				<p:commandButton value="Salvar" actionListener="#{tipoInfracaoMB.salvar()}" update="panel" ajax="true"/>
+				<p:commandButton value="Voltar" action="#{tipoInfracaoMB.voltar()}"/>
+	 
+	        </h:panelGrid>
+    	</p:panel>
+    </h:form>
+</h:body>
+</html>

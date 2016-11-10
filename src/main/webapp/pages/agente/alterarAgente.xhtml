@@ -17,6 +17,8 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
 			<h:panelGrid columns="2" cellpadding="5">
+				<label>Matrícula antiga: </label>
+				<p:inputText id="matriculaVelha" value="#{agenteMB.idMatricula}" />
 
 				<label>Nome: </label>
 				<p:inputText id="nome" value="#{agenteMB.agente.nome}" />
@@ -30,11 +32,11 @@
 
 				<label>Matrícula: </label>
 				<p:inputText id="matricula" value="#{agenteMB.agente.matricula}" />
-
-				<p:commandButton value="Alterar dados"
-					actionListener="#{agenteMB.alterarAgente()}" update="panel" />
+				
+				<p:commandButton value="Alterar" actionListener="#{agenteMB.alterarAgente()}" update="panel matriculaVelha"/>
 				<p:commandButton value="Voltar" action="#{agenteMB.voltar()}" />
 			</h:panelGrid>
+
 		</p:panel>
 
 	</h:form>

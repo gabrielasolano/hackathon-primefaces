@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.stefanini.model.Agente;
 import com.stefanini.model.Tipoinfracao;
 
 public class TipoinfracaoRepository {
@@ -24,6 +25,10 @@ public class TipoinfracaoRepository {
 
 	public Tipoinfracao busca(Integer id) {
 		return this.manager.find(Tipoinfracao.class, id);
+	}
+	
+	public void remove(Integer id) {
+		this.manager.remove(manager.find(Tipoinfracao.class, id));
 	}
 
 	public List<Tipoinfracao> lista() {

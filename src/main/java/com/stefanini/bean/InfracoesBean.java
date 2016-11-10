@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -48,6 +50,17 @@ public class InfracoesBean implements Serializable{
 	private Collection<Tipoinfracao> listaTipoInfracao = new ArrayList<Tipoinfracao>();
 	private Collection<Localinfracao> listaLocalInfracao = new ArrayList<Localinfracao>();
 	
+	private Collection<Infracoes> lista = new ArrayList<Infracoes>();
+
+
+
+	public Collection<Infracoes> getLista() {
+		return lista;
+	}
+
+	public void setLista(Collection<Infracoes> lista) {
+		this.lista = lista;
+	}
 
 	public Infracoes getInfracoes() {
 		if(infracoes == null){
@@ -70,9 +83,10 @@ public class InfracoesBean implements Serializable{
 		listaAgente = agenteService.listar();
 		listaTipoInfracao = tipoInfracaoService.listar();
 		listaLocalInfracao = localinfracaoService.listar();
+		lista = infracoesService.listar();
 	}
 	
-	public String cadastrarInfracoes(){
+	public void cadastrarInfracoes(){
 		
 		this.infracoes.setPlaca("teste");
 		
@@ -99,11 +113,83 @@ public class InfracoesBean implements Serializable{
 				local = lc;
 			}
 		}
-		
 		this.infracoes.setLocalInfracao(local);
-		infracoesService.incluir(this.infracoes);		
+		
+		try{
+			infracoesService.incluir(this.infracoes);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Infração cadastrada com sucesso!"));
+		}catch(Exception e){
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Infração não cadastrada!"));
+		}
+					
 		this.infracoes = new Infracoes();
-		return "/pages/sucesso.faces?faces-redirect=true";
+	}
+	
+	public void alterar(){
+		
+		this.infracoes.setPlaca("teste");
+		
+		Tipoinfracao tipo = new Tipoinfracao();
+		for(Tipoinfracao tp : listaTipoInfracao){
+			if(tp.getIdTipoInfracao().equals(this.idTipoInfracao)){
+				tipo = tp;
+			}
+		}
+		this.infracoes.setTipoInfracao(tipo);
+		
+		Agente agente = new Agente();
+		for(Agente ag : listaAgente){
+			if(ag.getIdAgente().equals(this.idAgente)){
+				agente = ag;
+			}
+		}
+		this.infracoes.setAgente(agente);
+		
+		Localinfracao local = new Localinfracao();
+		for(Localinfracao lc : listaLocalInfracao){
+			if(lc.getIdLocalInfracao().equals(this.idLocalInfracao)){
+				local = lc;
+			}
+		}
+		this.infracoes.setLocalInfracao(local);
+		
+		try{
+			procuraId();
+			infracoesService.alterar(this.infracoes);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Infração alterada com sucesso!"));
+		}catch(Exception e){
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Infração não alterada!"));
+		}
+					
+		this.infracoes = new Infracoes();
+	}
+	
+	public void remover() {
+		
+		try {
+			procuraId();
+			infracoesService.remover(this.infracoes.getIdInfracao());
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Infração removida com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Infração não removida!"));
+		}
+		this.infracoes = new Infracoes();
+	}
+	
+	private void procuraId() throws Exception {
+		inicia();
+		for (Infracoes inf : lista) {
+			if(inf.getIdInfracao().equals(this.infracoes.getIdInfracao())){
+				return;
+			}
+		}
+		throw new Exception();
 	}
 
 	public Integer getIdAgente() {
@@ -128,6 +214,15 @@ public class InfracoesBean implements Serializable{
 
 	public void setIdLocalInfracao(Integer idLocalInfracao) {
 		this.idLocalInfracao = idLocalInfracao;
+	}
+	
+	public String voltar() {
+		return "/index.faces?faces-redirect=true";
+
+	}
+	
+	public Collection<Infracoes> listar() {
+		return this.infracoesService.listar();
 	}
 
 }

@@ -12,18 +12,17 @@
 <h:body>
 	<h:form>
 
-		<!-- Inserir matricula : deletar agente -->
-		<p:panel id="panel" header="Remover Agente">
+		<p:panel id="panel" header="Remover Tipo de Infração">
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
 			<h:panelGrid columns="2" cellpadding="5">
-
-				<label>Matrícula: </label>
-				<p:inputText id="matricula" value="#{agenteMB.agente.matricula}" />
+				
+				<label>Identificador: </label>
+				<p:inputText id="idTipoInfracao" value="#{tipoInfracaoMB.tipoInfracao.idTipoInfracao}" />
 
 				<p:commandButton value="Remover"
-					actionListener="#{agenteMB.removerAgente()}" update="panel" />
-				<p:commandButton value="Voltar" action="#{agenteMB.voltar()}" />
+					actionListener="#{tipoInfracaoMB.remover()}" update="panel" />
+				<p:commandButton value="Voltar" action="#{tipoInfracaoMB.voltar()}" />
 			</h:panelGrid>
 		</p:panel>
 

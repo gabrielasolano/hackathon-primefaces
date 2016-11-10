@@ -34,4 +34,9 @@ public class AgenteService {
     public Collection<Agente> listar(){
     	return agenteRepository.listar();
     }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void remover(Integer id){
+    	agenteRepository.remove(id);
+    }
 }

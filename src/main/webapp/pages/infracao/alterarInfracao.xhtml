@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form>
+ 		
+    	<p:panel id="panel" header="Alterar infração">
+    	<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+ 			<!-- Velocidade -->
+ 			<h:panelGrid columns="2" cellpadding="5">
+ 				<label>Identificador: </label>
+        		<p:inputText id="identificador" value="#{infracoesMB.infracoes.idInfracao}"/>
+ 			
+ 				<label>Velocidade: </label>
+        		<p:inputText id="velocidade" value="#{infracoesMB.infracoes.velocidade}"/>
+    		
+    		<!-- Tipo de infração -->
+    		
+    			<label>Tipo de infração: </label>
+            	<p:selectOneMenu id="tipoInfracao" style="width:150px" value="#{infracoesMB.idTipoInfracao}">	
+                	<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                	<f:selectItems value="#{tipoInfracaoMB.listar()}" var="tipo" itemValue="#{tipo.idTipoInfracao}" itemLabel="#{tipo.descricaoTipoInfracao}"/>
+            	</p:selectOneMenu>
+        	        	
+        	<!-- Agente -->
+
+        		<label>Agente: </label>
+            	<p:selectOneMenu id="agente" style="width:150px" value="#{infracoesMB.idAgente}">
+                	<f:selectItem itemLabel="Selecione"  noSelectionOption="true" />
+                	<f:selectItems value="#{agenteMB.listar()}" var="ag" itemValue="#{ag.idAgente}" itemLabel="#{ag.nome}"/>
+            	</p:selectOneMenu>
+            	
+            <!-- Local da infracao -->
+
+        		<label>Local da infração: </label>
+            	<p:selectOneMenu id="local" style="width:150px" value="#{infracoesMB.idLocalInfracao}">
+                	<f:selectItem itemLabel="Selecione"  noSelectionOption="true" />
+                	<f:selectItems value="#{localInfracaoMB.listar()}" var="local" itemValue="#{local.idLocalInfracao}" itemLabel="#{local.descricaoLocalInfracao}"/>
+            	</p:selectOneMenu>
+        	
+				<p:commandButton value="Alterar" update="panel tipoInfracao agente local" actionListener="#{infracoesMB.alterar()}" icon="ui-icon-check" />    	
+    			<p:commandButton value="Voltar" action="#{infracoesMB.voltar()}" />
+    		</h:panelGrid>
+    	</p:panel>
+
+
+	<!-- tipo de infracao, local infracao, agente, placa (fk) -->
+	<!-- velocidade -->
+
+    </h:form>
+</h:body>
+</html>

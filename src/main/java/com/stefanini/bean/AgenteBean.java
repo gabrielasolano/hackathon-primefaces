@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.stefanini.model.Agente;
+import com.stefanini.model.Infracoes;
 import com.stefanini.service.AgenteService;
 
 @Named("agenteMB")
@@ -24,7 +28,13 @@ public class AgenteBean implements Serializable {
 	@Inject
 	private Agente agente;
 
-	private List<Agente> lista = new ArrayList<Agente>();
+	private Collection<Agente> lista = new ArrayList<Agente>();
+	private Integer idMatricula;
+
+	@PostConstruct
+	public void inicia() {
+		lista = agenteService.listar();
+	}
 
 	public Agente getAgente() {
 		if (agente == null) {
@@ -37,23 +47,73 @@ public class AgenteBean implements Serializable {
 		this.agente = agente;
 	}
 
+	public Collection<Agente> getLista() {
+		return lista;
+	}
 
-	public String cadastrarAgente() {
+	public void setLista(Collection<Agente> lista) {
+		this.lista = lista;
+	}
 
-		if (agenteService == null)
-			agenteService = new AgenteService();
+	public Integer getIdMatricula() {
+		return idMatricula;
+	}
 
-		/* Calcular tempo de servi�o */
+	public void setIdMatricula(Integer idMatricula) {
+		this.idMatricula = idMatricula;
+	}
+
+	public void cadastrarAgente() {
 
 		try {
 			agenteService.incluir(getAgente());
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Agente cadastrado com sucesso!"));
 
 		} catch (Exception e) {
-			return "/pages/erro.faces?faces-redirect=true";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Agente não cadastrado!"));
 		}
 
 		this.agente = new Agente();
-		return "/pages/sucesso.faces?faces-redirect=true";
+	}
+
+	public void alterarAgente() {
+
+		/* procurar o id do agente por meio da matrícula antiga */
+		try {
+			Agente a = procurarMatricular(this.idMatricula);
+			a.setNome(this.agente.getNome());
+			a.setDtContratacao(this.agente.getDtContratacao());
+			a.setTempoServico(this.agente.getTempoServico());
+			a.setMatricula(this.agente.getMatricula());
+
+		
+			agenteService.alterar(a);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Agente alterado com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Agente não alterado!"));
+		}
+
+		this.agente = new Agente();
+		this.idMatricula = new Integer(0);
+
+	}
+
+	public void removerAgente() {
+	
+		try {
+			Agente a = procurarMatricular(this.agente.getMatricula());
+			agenteService.remover(a.getIdAgente());
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Agente removido com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Agente não removido!"));
+		}
+		this.agente = new Agente();
 	}
 
 	public String voltar() {
@@ -65,26 +125,14 @@ public class AgenteBean implements Serializable {
 		return this.agenteService.listar();
 	}
 
-	public List<Integer> todosAgentes() {
-		Collection<Agente> colecao = agenteService.listar();
-		Collection<Integer> matricula = new ArrayList<Integer>();
-		for (Agente ag : colecao) {
-			Integer mat = ag.getMatricula();
-			matricula.add(mat);
+	private Agente procurarMatricular(Integer matricula) {
+		inicia();
+		for (Agente ag : lista) {
+			if (ag.getMatricula().equals(matricula)) {
+				return ag;
+			}
 		}
-		return (List<Integer>) matricula;
+		return null;
 	}
-
-	public List<Agente> getLista() {
-		return lista;
-	}
-
-	public void setLista(List<Agente> lista) {
-		this.lista = lista;
-	}
-
-	/*
-	 * public void alterarAgente(){ agenteService.alterar(getAgente()); }
-	 */
 
 }

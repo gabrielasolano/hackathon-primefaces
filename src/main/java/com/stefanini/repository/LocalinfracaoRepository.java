@@ -26,6 +26,10 @@ public class LocalinfracaoRepository {
 	public Localinfracao busca(Integer id) {
 		return this.manager.find(Localinfracao.class, id);
 	}
+	
+	public void remove(Integer id) {
+		this.manager.remove(manager.find(Localinfracao.class, id));
+	}
 
 	public List<Localinfracao> lista() {
 		return this.manager.createQuery("select c from denuncia c", Localinfracao.class)

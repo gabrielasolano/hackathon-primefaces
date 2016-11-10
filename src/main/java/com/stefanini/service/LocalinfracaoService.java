@@ -26,4 +26,15 @@ public class LocalinfracaoService {
     public Collection<Localinfracao> listar(){
     	return localInfracaoRepository.listar();
     }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void alterar(Localinfracao localInfracao){
+    	localInfracaoRepository.altera(localInfracao);
+    	
+    }
+      
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void remover(Integer id){
+    	localInfracaoRepository.remove(id);
+    }
 }

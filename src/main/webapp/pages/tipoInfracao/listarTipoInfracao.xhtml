@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+<h:form>          
+     
+    <p:dataTable id="tipos" var="tp" value="#{tipoInfracaoMB.listar()}">
+        <f:facet name="header">
+            Tipos de infração cadastrados
+        </f:facet>
+        <p:column headerText="Identificador">
+            <h:outputText value="#{tp.idTipoInfracao}" />
+        </p:column>
+        <p:column headerText="Descrição">
+            <h:outputText value="#{tp.descricaoTipoInfracao}" />
+        </p:column>
+        <p:column headerText="Valor">
+            <h:outputText value="#{tp.valor}" />
+        </p:column>
+        				
+    </p:dataTable>
+    <p:commandButton value="Voltar" action="#{tipoInfracaoMB.voltar()}" />
+ 
+</h:form>
+</h:body>
+</html>

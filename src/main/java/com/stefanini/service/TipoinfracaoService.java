@@ -7,6 +7,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+import com.stefanini.model.Agente;
 import com.stefanini.model.Tipoinfracao;
 import com.stefanini.repository.TipoinfracaoRepository;
 
@@ -23,6 +24,17 @@ public class TipoinfracaoService {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Collection<Tipoinfracao> listar(){
     	return tipoInfracaoRepository.listar();
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void alterar(Tipoinfracao tipoInfracao){
+    	tipoInfracaoRepository.altera(tipoInfracao);
+    	
+    }
+      
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void remover(Integer id){
+    	tipoInfracaoRepository.remove(id);
     }
 	
 }
