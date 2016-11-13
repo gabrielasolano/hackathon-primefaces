@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form>
+	<p:messages id="mensagem" showDetail="true" autoUpdate="true" closable="true" />
+		<br />
+    <p:dataTable id="proprietarios" var="prop" value="#{proprietarioMB.listar()}">
+    
+        <f:facet name="header">
+            Proprietários Cadastrados
+        </f:facet>
+        <p:column headerText="CPF">
+            <h:outputText value="#{prop.cpfProprietario}" />
+        </p:column>
+        <p:column headerText="Nome">
+            <h:outputText value="#{prop.nome}" />
+        </p:column>
+		<p:column headerText="Endereço">
+            <h:outputText value="#{prop.endereco}" />
+        </p:column>        
+        <p:column headerText="Bairro">
+            <h:outputText value="#{prop.bairro}" />
+        </p:column>
+        <p:column headerText="Cidade">
+            <h:outputText value="#{prop.cidade}" />
+        </p:column>
+        <p:column headerText="UF">
+            <h:outputText value="#{prop.uf}" />
+        </p:column>
+        <p:column headerText="Sexo">
+            <h:outputText value="#{prop.sexo}" />
+        </p:column>
+        <p:column headerText="Data de nascimento">
+            <h:outputText value="#{prop.dtNascimento.toString()}" />
+        </p:column>
+        <p:column style="text-align: center">
+        <p:commandButton value="Alterar" action="#{proprietarioMB.recuperaId()}">
+        	<f:param name="cpf" value="#{prop.cpfProprietario}"></f:param>
+        	<f:param name="nome" value="#{prop.nome}"/>
+        	<f:param name="endereco" value="#{prop.endereco}"/>
+        	<f:param name="bairro" value="#{prop.bairro}"/>
+        	<f:param name="cidade" value="#{prop.cidade}"/>
+        	<f:param name="uf" value="#{prop.uf}"/>
+        	<f:param name="sexo" value="#{prop.sexo}"/>
+        	<f:param name="dtNascimento" value="#{prop.dtNascimento}"/>
+        </p:commandButton>
+		</p:column>
+		<p:column style="text-align: center">
+		<p:commandButton value="Remover" actionListener="#{proprietarioMB.removerProprietario(prop.cpfProprietario)}" update="proprietarios" ajax="false">
+		</p:commandButton>
+        </p:column>
+    </p:dataTable>
+	<p:commandButton value="Cadastrar" action="cadastrarProprietario" />
+	<p:commandButton value="Voltar" action="/index"/>
+    </h:form>
+</h:body>
+</html>

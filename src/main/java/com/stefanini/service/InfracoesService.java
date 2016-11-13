@@ -8,7 +8,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import com.stefanini.model.Infracoes;
-import com.stefanini.model.Localinfracao;
 import com.stefanini.repository.InfracoesRepository;
 
 @Stateless

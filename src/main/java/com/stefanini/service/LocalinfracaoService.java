@@ -8,9 +8,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import com.stefanini.model.Localinfracao;
-import com.stefanini.model.Tipoinfracao;
 import com.stefanini.repository.LocalinfracaoRepository;
-import com.stefanini.repository.TipoinfracaoRepository;
 
 @Stateless
 public class LocalinfracaoService {

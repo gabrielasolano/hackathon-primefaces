@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "proprietario", catalog = "hackaton")
 public class Proprietario implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer cpfProprietario;
 	private String nome;
 	private String endereco;
@@ -43,7 +44,6 @@ public class Proprietario implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "cpfProprietario", unique = true, nullable = false)
 	public Integer getCpfProprietario() {
 		return this.cpfProprietario;
