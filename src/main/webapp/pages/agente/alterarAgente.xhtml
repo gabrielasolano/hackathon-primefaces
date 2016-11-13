@@ -17,24 +17,24 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
 			<h:panelGrid columns="2" cellpadding="5">
-				<label>Matrícula antiga: </label>
-				<p:inputText id="matriculaVelha" value="#{agenteMB.idMatricula}" />
+				<!-- <label>Matrícula antiga: </label>
+				<p:inputText id="matriculaVelha" value="#{agenteMB.idMatricula}" /> -->
 
 				<label>Nome: </label>
-				<p:inputText id="nome" value="#{agenteMB.agente.nome}" />
+				<p:inputText id="nome" value="#{agenteMB.agente.nome}" placeholder="#{agenteMB.nome}"/>
 
 				<label>Data de contratação: </label>
-				<p:calendar id="data" value="#{agenteMB.agente.dtContratacao}" />
+				<p:calendar id="data" value="#{agenteMB.agente.dtContratacao}" placeholder="#{agenteMB.dtContratacao}"/>
 
 				<label>Tempo de serviço: </label>
 				<p:inputText id="tempoServico"
-					value="#{agenteMB.agente.tempoServico}" />
+					value="#{agenteMB.agente.tempoServico}" placeholder="#{agenteMB.tempoServico}"/>
 
 				<label>Matrícula: </label>
-				<p:inputText id="matricula" value="#{agenteMB.agente.matricula}" />
+				<p:inputText id="matricula" value="#{agenteMB.agente.matricula}" placeholder="#{agenteMB.idMatricula}"/>
 				
-				<p:commandButton value="Alterar" actionListener="#{agenteMB.alterarAgente()}" update="panel matriculaVelha"/>
-				<p:commandButton value="Voltar" action="#{agenteMB.voltar()}" />
+				<p:commandButton value="Alterar" actionListener="#{agenteMB.alterarAgente(agenteMB.idMatricula)}" update="panel"/>
+				<p:commandButton value="Voltar" action="#{agenteMB.voltar()}"/>
 			</h:panelGrid>
 
 		</p:panel>

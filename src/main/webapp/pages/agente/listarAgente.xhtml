@@ -7,9 +7,11 @@
 <h:head>
 </h:head>
 <h:body>
-<h:form>          
-     
+    <h:form>
+<p:messages id="mensagem" showDetail="true" autoUpdate="true" closable="true" />
+		<br />
     <p:dataTable id="agentes" var="ag" value="#{agenteMB.listar()}">
+    
         <f:facet name="header">
             Agentes Cadastrados
         </f:facet>
@@ -25,10 +27,21 @@
         <p:column headerText="Tempo de serviço">
             <h:outputText value="#{ag.tempoServico}" />
         </p:column>
-        				
+        <p:column style="text-align: center">
+        <p:commandButton value="Alterar" action="#{agenteMB.recuperaId()}">
+        	<f:param name="matricula" value="#{ag.matricula}"></f:param>
+        	<f:param name="nome" value="#{ag.nome}"/>
+        	<f:param name="dtContratacao" value="#{ag.dtContratacao}"/>
+        	<f:param name="tempoServico" value="#{ag.tempoServico}"/>
+        </p:commandButton>
+		</p:column>
+		<p:column style="text-align: center">
+		<p:commandButton value="Remover" actionListener="#{agenteMB.removerAgente(ag.matricula)}" update="agentes" ajax="false">
+		</p:commandButton>
+        </p:column>
     </p:dataTable>
-    <p:commandButton value="Voltar" action="#{agenteMB.voltar()}" />
- 
-</h:form>
+	<p:commandButton value="Cadastrar" action="cadastrarAgente" />
+	<p:commandButton value="Voltar" action="/index"/>
+    </h:form>
 </h:body>
 </html>

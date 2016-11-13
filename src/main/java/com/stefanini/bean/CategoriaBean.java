@@ -12,55 +12,54 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.stefanini.model.Tipoinfracao;
-import com.stefanini.service.TipoinfracaoService;
+import com.stefanini.model.Categoria;
+import com.stefanini.service.CategoriaService;
 
-@Named("tipoInfracaoMB")
+@Named("categoriaMB")
 @SessionScoped
-public class TipoinfracaoBean implements Serializable {
+public class CategoriaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private TipoinfracaoService tipoInfracaoService;
+	private CategoriaService categoriaService;
 
 	@Inject
-	private Tipoinfracao tipoInfracao;
+	private Categoria categoria;
 
-	private Collection<Tipoinfracao> lista = new ArrayList<Tipoinfracao>();
+	private Collection<Categoria> lista = new ArrayList<Categoria>();
 
-	private Integer idTipoInfracao;
+	private Integer idCategoria;
 	private String descricao;
-	private Double valor;
 
 	@PostConstruct
 	public void inicia() {
-		lista = tipoInfracaoService.listar();
+		lista = categoriaService.listar();
 	}
 
-	public Tipoinfracao getTipoInfracao() {
-		if (tipoInfracao == null) {
-			tipoInfracao = new Tipoinfracao();
+	public Categoria getCategoria() {
+		if (categoria == null) {
+			categoria = new Categoria();
 		}
-		return tipoInfracao;
+		return categoria;
 	}
 
-	public void setTipoInfracao(Tipoinfracao tipoInfracao) {
-		this.tipoInfracao = tipoInfracao;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
-	public Collection<Tipoinfracao> getLista() {
+	public Collection<Categoria> getLista() {
 		return lista;
 	}
 
-	public void setLista(Collection<Tipoinfracao> lista) {
+	public void setLista(Collection<Categoria> lista) {
 		this.lista = lista;
 	}
 
 	public void salvar() {
 
 		try {
-			tipoInfracaoService.incluir(getTipoInfracao());
+			categoriaService.incluir(getCategoria());
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Salvo com sucesso!"));
 
@@ -68,14 +67,14 @@ public class TipoinfracaoBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
-		this.tipoInfracao = new Tipoinfracao();
+		this.categoria = new Categoria();
 	}
 
 	public void alterar(Integer id) {
 
 		try {
-			this.tipoInfracao.setIdTipoInfracao(id);
-			tipoInfracaoService.alterar(this.tipoInfracao);
+			this.categoria.setIdCategoria(id);
+			categoriaService.alterar(this.categoria);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Alterado com sucesso!"));
 		} catch (Exception e) {
@@ -83,7 +82,7 @@ public class TipoinfracaoBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
 
-		this.tipoInfracao = new Tipoinfracao();
+		this.categoria = new Categoria();
 
 	}
 
@@ -91,42 +90,41 @@ public class TipoinfracaoBean implements Serializable {
 
 		try {
 			// procuraId();
-			tipoInfracaoService.remover(id);
+			categoriaService.remover(id);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Removido com sucesso!"));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
-		this.tipoInfracao = new Tipoinfracao();
+		this.categoria = new Categoria();
 
-		return "listarTipoInfracao?faces-redirect=true";
+		return "listarCategoria?faces-redirect=true";
 	}
 
 	public String voltar() {
-		return "listarTipoInfracao?faces-redirect=true";
+		return "listarCategoria?faces-redirect=true";
 
 	}
 
-	public Collection<Tipoinfracao> listar() {
-		return this.tipoInfracaoService.listar();
+	public Collection<Categoria> listar() {
+		return this.categoriaService.listar();
 	}
 
-	public Integer getIdTipoInfracao() {
-		return idTipoInfracao;
+	public Integer getIdCategoria() {
+		return idCategoria;
 	}
 
-	public void setIdTipoInfracao(Integer idTipoInfracao) {
-		this.idTipoInfracao = idTipoInfracao;
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 	public String recuperaId() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		idTipoInfracao = Integer.parseInt(params.get("idTipoInfracao"));
+		idCategoria = Integer.parseInt(params.get("idCategoria"));
 		descricao = params.get("descricao");
-		valor = Double.parseDouble(params.get("valor"));
-		return "alterarTipoInfracao?faces-redirect=true";
+		return "alterarCategoria?faces-redirect=true";
 	}
 
 	public String getDescricao() {
@@ -136,13 +134,4 @@ public class TipoinfracaoBean implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
 }

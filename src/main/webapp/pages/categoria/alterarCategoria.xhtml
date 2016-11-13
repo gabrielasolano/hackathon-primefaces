@@ -13,18 +13,15 @@
 	<h:form>
 
 		<!-- Inserir dados, pesquisar por matricula para editar -->
-		<p:panel id="panel" header="Local de infração">
+		<p:panel id="panel" header="Categoria">
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
 			<h:panelGrid columns="2" cellpadding="5">
 				<label>Descrição: </label>
-				<p:inputTextarea rows="6" cols="33" id="descricao" value="#{localInfracaoMB.localInfracao.descricaoLocalInfracao}" placeholder="#{localInfracaoMB.descricao}"/>
+				<p:inputTextarea rows="6" cols="33" id="descricao" value="#{categoriaMB.categoria.descricaiCategoria}" placeholder="#{categoriaMB.descricao}"/>
 				
-				<label>Velocidade permitida: </label>
-				<p:inputText id="velocidade" value="#{localInfracaoMB.localInfracao.velocidadePermitida}" placeholder="#{localInfracaoMB.velocidade}"/>
-
-				<p:commandButton value="Alterar" actionListener="#{localInfracaoMB.alterar(localInfracaoMB.idLocalInfracao)}" update="panel"/>
-				<p:commandButton value="Voltar" action="#{localInfracaoMB.voltar()}" />
+				<p:commandButton value="Alterar" actionListener="#{categoriaMB.alterar(categoriaMB.idCategoria)}" update="panel"/>
+				<p:commandButton value="Voltar" action="#{categoriaMB.voltar()}" />
 			</h:panelGrid>
 
 		</p:panel>

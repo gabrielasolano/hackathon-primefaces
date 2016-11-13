@@ -17,16 +17,13 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
 			<h:panelGrid columns="2" cellpadding="5">
-				<label>Identificador: </label>
-				<p:inputText id="idTipoInfracao" value="#{tipoInfracaoMB.tipoInfracao.idTipoInfracao}" />
-
 				<label>Descrição: </label>
-				<p:inputTextarea rows="6" cols="33" id="descricao" value="#{tipoInfracaoMB.tipoInfracao.descricaoTipoInfracao}" />
+				<p:inputTextarea rows="6" cols="33" id="descricao" value="#{tipoInfracaoMB.tipoInfracao.descricaoTipoInfracao}" placeholder="#{tipoInfracaoMB.descricao}"/>
 				
 				<label>Valor: </label>
-				<p:inputText id="valor" value="#{tipoInfracaoMB.tipoInfracao.valor}" />
+				<p:inputText id="valor" value="#{tipoInfracaoMB.tipoInfracao.valor}" placeholder="#{tipoInfracaoMB.valor}"/>
 
-				<p:commandButton value="Alterar" actionListener="#{tipoInfracaoMB.alterar()}" update="panel"/>
+				<p:commandButton value="Alterar" actionListener="#{tipoInfracaoMB.alterar(tipoInfracaoMB.idTipoInfracao)}" update="panel"/>
 				<p:commandButton value="Voltar" action="#{tipoInfracaoMB.voltar()}" />
 			</h:panelGrid>
 

@@ -13,35 +13,31 @@
 	<h:form> 
 		<p:messages id="mensagem" showDetail="true" autoUpdate="true" closable="true" />
 		<br />
-		<p:dataTable id="tipos" var="tp" value="#{tipoInfracaoMB.listar()}">
+		<p:dataTable id="categorias" var="tp" value="#{categoriaMB.listar()}">
 			<p:growl id="msgs" showDetail="true" />
 			<f:facet name="header">
-            	Tipos de infração cadastrados
+            	Categorias cadastradas
         	</f:facet>
 			<p:column headerText="Identificador">
-				<h:outputText value="#{tp.idTipoInfracao}" />
+				<h:outputText value="#{tp.idCategoria}" />
 			</p:column>
 			<p:column headerText="Descrição">
-				<h:outputText value="#{tp.descricaoTipoInfracao}" />
-			</p:column>
-			<p:column headerText="Valor">
-				<h:outputText value="#{tp.valor}" />
+				<h:outputText value="#{tp.descricaiCategoria}" />
 			</p:column>
 			<p:column style="text-align: center">
 				<p:commandButton value="Alterar"
-					action="#{tipoInfracaoMB.recuperaId()}">
-					<f:param name="idTipoInfracao" value="#{tp.idTipoInfracao}" />
-					<f:param name="descricao" value="#{tp.descricaoTipoInfracao}" />
-					<f:param name="valor" value="#{tp.valor}" />
+					action="#{categoriaMB.recuperaId()}">
+					<f:param name="idCategoria" value="#{tp.idCategoria}" />
+					<f:param name="descricao" value="#{tp.descricaiCategoria}" />
 				</p:commandButton>
 			</p:column>
 			<p:column style="text-align: center">
 				<p:commandButton ajax="false" value="Remover"
-					actionListener="#{tipoInfracaoMB.remover(tp.idTipoInfracao)}"
-					update="tipos"/>
+					actionListener="#{categoriaMB.remover(tp.idCategoria)}"
+					update="categorias"/>
 			</p:column>
 		</p:dataTable>
-		<p:commandButton value="Cadastrar" action="cadastrarTipoInfracao" />
+		<p:commandButton value="Cadastrar" action="cadastrarCategoria" />
 		<p:commandButton value="Voltar" action="/index" />
 		
 		<!-- <p:growl id="growl" showDetail="true" showSummary="false" severity="info, error"/> --> 

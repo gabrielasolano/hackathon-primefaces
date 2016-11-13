@@ -7,41 +7,21 @@
 <h:head>
 </h:head>
 <h:body>
-    <h:form>
-      
+    <h:form> 
          <!-- Menu pagina inicial -->
 		<p:growl autoUpdate="true"/>
 	 
 	    	<p:panelMenu style="width:300px">
 	        <p:submenu label="Detran" >
-	            <p:submenu label="Agente" icon="ui-icon-extlink">
-	                <p:menuitem value="Cadastrar" outcome="/pages/agente/cadastrarAgente" icon="ui-icon-cadastrar" />
-	                <p:menuitem value="Visualizar" outcome="/pages/agente/listarAgente" icon="ui-icon-pesquisar" />
-	                <p:menuitem value="Alterar" outcome="/pages/agente/alterarAgente" icon="ui-icon-alterar" />
-	                <p:menuitem value="Deletar" outcome="/pages/agente/deletarAgente" icon="ui-icon-deletar" />
-	            </p:submenu>
-	           	<p:submenu label="Infrações" icon="ui-icon-extlink">
-	                <p:menuitem value="Cadastrar" outcome="/pages/infracao/cadastrarInfracao" icon="ui-icon-cadastrar" />
-	                <p:menuitem value="Visualizar" outcome="/pages/infracao/listarInfracao" icon="ui-icon-pesquisar" />
-	                <p:menuitem value="Alterar" outcome="/pages/infracao/alterarInfracao" icon="ui-icon-pesquisar" />
-	                <p:menuitem value="Deletar" outcome="/pages/infracao/deletarInfracao" icon="ui-icon-pesquisar" />
-	            </p:submenu>
-	           	<p:submenu label="Tipo de Infração" icon="ui-icon-extlink">
-	                <p:menuitem value="Cadastrar" outcome="/pages/tipoInfracao/cadastrarTipoInfracao" icon="ui-icon-cadastrar" />
-					<p:menuitem value="Visualizar" outcome="/pages/tipoInfracao/listarTipoInfracao" icon="ui-icon-pesquisar" />
-	                <p:menuitem value="Alterar" outcome="/pages/tipoInfracao/alterarTipoInfracao" icon="ui-icon-alterar" />
-	                <p:menuitem value="Deletar" outcome="/pages/tipoInfracao/deletarTipoInfracao" icon="ui-icon-deletar" />
-	            </p:submenu>
-	           	<p:submenu label="Locais de Infração" icon="ui-icon-extlink">
-	                <p:menuitem value="Cadastrar" outcome="/pages/localInfracao/cadastrarLocalInfracao" icon="ui-icon-cadastrar" />
-	                <p:menuitem value="Visualizar" outcome="/pages/localInfracao/listarLocalInfracao" icon="ui-icon-pesquisar" />
-	                <p:menuitem value="Alterar" outcome="/pages/localInfracao/alterarLocalInfracao" icon="ui-icon-alterar" />
-	                <p:menuitem value="Deletar" outcome="/pages/localInfracao/deletarLocalInfracao" icon="ui-icon-deletar" />
-	            </p:submenu>
-	        </p:submenu>
+	        	<p:menuitem value="Agente" outcome="/pages/agente/listarAgente"/>
+	        	<p:menuitem value="Infrações" outcome="/pages/infracao/listarInfracao"/>
+	        	<p:menuitem value="Tipo de Infração" outcome="/pages/tipoInfracao/listarTipoInfracao"/>
+	           	<p:menuitem value="Locais de Infração" outcome="/pages/localInfracao/listarLocalInfracao"/>
+	           	<p:menuitem value="Tipos de Telefone" outcome="/pages/tipoTelefone/listarTipoTelefone"/>
+	           	<p:menuitem value="Categoria" outcome="/pages/categoria/listarCategoria"/>
+	       </p:submenu>
 	    </p:panelMenu>
-  
-         
+
     </h:form>
 </h:body>
 </html>

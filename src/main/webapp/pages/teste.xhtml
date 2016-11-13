@@ -8,12 +8,36 @@
 </h:head>
 <h:body>
     <h:form>
-    	<h:outputText value="#{agenteMB.agente.nome}" /><br/>
-    	<h:outputText value="#{agenteMB.agente.dtContratacao}">
- 			<f:convertDateTime pattern="dd/MM/yyyy" />
-    	</h:outputText><br/>
-    	<h:outputText value="#{agenteMB.agente.tempoServico}" /><br/>
-         <p:commandButton value="Voltar" action="#{agenteMB.voltar()}"></p:commandButton>         
+    <p:dataTable id="agentes" var="ag" value="#{agenteMB.listar()}">
+    
+        <f:facet name="header">
+            Agentes Cadastrados
+        </f:facet>
+        <p:column headerText="Matrícula">
+            <h:outputText value="#{ag.matricula}" />
+        </p:column>
+        <p:column headerText="Nome">
+            <h:outputText value="#{ag.nome}" />
+        </p:column>
+        <p:column headerText="Data de contratação">
+            <h:outputText value="#{ag.dtContratacao.toString()}" />
+        </p:column>
+        <p:column headerText="Tempo de serviço">
+            <h:outputText value="#{ag.tempoServico}" />
+        </p:column>
+        <p:column style="text-align: center">
+        <p:commandButton value="Alterar" action="#{agenteMB.recuperaId()}">
+        	<f:param name="matricula" value="#{ag.matricula}"></f:param>
+        </p:commandButton>
+		</p:column>
+		<p:column style="text-align: center">
+		<p:commandButton value="Remover"
+					actionListener="#{agenteMB.removerAgente(ag.matricula)}" update="agentes">
+		</p:commandButton>
+        </p:column>
+    </p:dataTable>
+	<p:commandButton value="Cadastrar" action="agente/cadastrarAgente" />
+	<p:commandButton value="Voltar" action="/index"/>
     </h:form>
 </h:body>
 </html>

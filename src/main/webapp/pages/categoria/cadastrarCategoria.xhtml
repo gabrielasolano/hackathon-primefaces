@@ -9,19 +9,16 @@
 <h:body>
     <h:form>
  		
- 		<p:panel id="panel" header="Local de infração">
+ 		<p:panel id="panel" header="Categoria">
         	<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
  
 	        <h:panelGrid columns="2" cellpadding="5">
 	            <label>Descrição: </label>
-	            <p:inputTextarea rows="6" cols="33" id="descricao" value="#{localInfracaoMB.localInfracao.descricaoLocalInfracao}" label="Descrição" />
-	 
-	            <label>Velocidade: </label>
-	            <p:inputText id="velocidade" value="#{localInfracaoMB.localInfracao.velocidadePermitida}" label="Velocidade"/>
+	            <p:inputTextarea rows="6" cols="33" id="descricao" value="#{categoriaMB.categoria.descricaiCategoria}" label="Descrição" />
 	            
-				<p:commandButton value="Salvar" actionListener="#{localInfracaoMB.salvar()}" update="panel" ajax="true"/>
-				<p:commandButton value="Voltar" action="#{localInfracaoMB.voltar()}"/>
+				<p:commandButton value="Salvar" actionListener="#{categoriaMB.salvar()}" update="panel" ajax="true"/>
+				<p:commandButton value="Voltar" action="#{categoriaMB.voltar()}"/>
 	 
 	        </h:panelGrid>
     	</p:panel>

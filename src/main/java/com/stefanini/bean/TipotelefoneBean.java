@@ -12,55 +12,54 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.stefanini.model.Tipoinfracao;
-import com.stefanini.service.TipoinfracaoService;
+import com.stefanini.model.Tipotelefone;
+import com.stefanini.service.TipotelefoneService;
 
-@Named("tipoInfracaoMB")
+@Named("tipoTelefoneMB")
 @SessionScoped
-public class TipoinfracaoBean implements Serializable {
+public class TipotelefoneBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private TipoinfracaoService tipoInfracaoService;
+	private TipotelefoneService tipoTelefoneService;
 
 	@Inject
-	private Tipoinfracao tipoInfracao;
+	private Tipotelefone tipoTelefone;
 
-	private Collection<Tipoinfracao> lista = new ArrayList<Tipoinfracao>();
+	private Collection<Tipotelefone> lista = new ArrayList<Tipotelefone>();
 
-	private Integer idTipoInfracao;
+	private Integer idTipoTelefone;
 	private String descricao;
-	private Double valor;
 
 	@PostConstruct
 	public void inicia() {
-		lista = tipoInfracaoService.listar();
+		lista = tipoTelefoneService.listar();
 	}
 
-	public Tipoinfracao getTipoInfracao() {
-		if (tipoInfracao == null) {
-			tipoInfracao = new Tipoinfracao();
+	public Tipotelefone getTipoTelefone() {
+		if (tipoTelefone == null) {
+			tipoTelefone = new Tipotelefone();
 		}
-		return tipoInfracao;
+		return tipoTelefone;
 	}
 
-	public void setTipoInfracao(Tipoinfracao tipoInfracao) {
-		this.tipoInfracao = tipoInfracao;
+	public void setTipoTelefone(Tipotelefone tipoTelefone) {
+		this.tipoTelefone = tipoTelefone;
 	}
 
-	public Collection<Tipoinfracao> getLista() {
+	public Collection<Tipotelefone> getLista() {
 		return lista;
 	}
 
-	public void setLista(Collection<Tipoinfracao> lista) {
+	public void setLista(Collection<Tipotelefone> lista) {
 		this.lista = lista;
 	}
 
 	public void salvar() {
 
 		try {
-			tipoInfracaoService.incluir(getTipoInfracao());
+			tipoTelefoneService.incluir(getTipoTelefone());
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Salvo com sucesso!"));
 
@@ -68,14 +67,14 @@ public class TipoinfracaoBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
-		this.tipoInfracao = new Tipoinfracao();
+		this.tipoTelefone = new Tipotelefone();
 	}
 
 	public void alterar(Integer id) {
 
 		try {
-			this.tipoInfracao.setIdTipoInfracao(id);
-			tipoInfracaoService.alterar(this.tipoInfracao);
+			this.tipoTelefone.setIdTipoTelefone(id);
+			tipoTelefoneService.alterar(this.tipoTelefone);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Alterado com sucesso!"));
 		} catch (Exception e) {
@@ -83,7 +82,7 @@ public class TipoinfracaoBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
 
-		this.tipoInfracao = new Tipoinfracao();
+		this.tipoTelefone = new Tipotelefone();
 
 	}
 
@@ -91,42 +90,41 @@ public class TipoinfracaoBean implements Serializable {
 
 		try {
 			// procuraId();
-			tipoInfracaoService.remover(id);
+			tipoTelefoneService.remover(id);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Removido com sucesso!"));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
-		this.tipoInfracao = new Tipoinfracao();
+		this.tipoTelefone = new Tipotelefone();
 
-		return "listarTipoInfracao?faces-redirect=true";
+		return "listarTipoTelefone?faces-redirect=true";
 	}
 
 	public String voltar() {
-		return "listarTipoInfracao?faces-redirect=true";
+		return "listarTipoTelefone?faces-redirect=true";
 
 	}
 
-	public Collection<Tipoinfracao> listar() {
-		return this.tipoInfracaoService.listar();
+	public Collection<Tipotelefone> listar() {
+		return this.tipoTelefoneService.listar();
 	}
 
-	public Integer getIdTipoInfracao() {
-		return idTipoInfracao;
+	public Integer getIdTipoTelefone() {
+		return idTipoTelefone;
 	}
 
-	public void setIdTipoInfracao(Integer idTipoInfracao) {
-		this.idTipoInfracao = idTipoInfracao;
+	public void setIdTipoTelefone(Integer idTipoTelefone) {
+		this.idTipoTelefone = idTipoTelefone;
 	}
 
 	public String recuperaId() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		idTipoInfracao = Integer.parseInt(params.get("idTipoInfracao"));
+		idTipoTelefone = Integer.parseInt(params.get("idTipoTelefone"));
 		descricao = params.get("descricao");
-		valor = Double.parseDouble(params.get("valor"));
-		return "alterarTipoInfracao?faces-redirect=true";
+		return "alterarTipoTelefone?faces-redirect=true";
 	}
 
 	public String getDescricao() {
@@ -136,13 +134,4 @@ public class TipoinfracaoBean implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
 }

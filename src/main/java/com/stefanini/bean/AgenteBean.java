@@ -3,7 +3,7 @@ package com.stefanini.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.stefanini.model.Agente;
-import com.stefanini.model.Infracoes;
 import com.stefanini.service.AgenteService;
 
 @Named("agenteMB")
@@ -30,6 +29,9 @@ public class AgenteBean implements Serializable {
 
 	private Collection<Agente> lista = new ArrayList<Agente>();
 	private Integer idMatricula;
+	private Integer tempoServico;
+	private String dtContratacao;
+	private String nome;
 
 	@PostConstruct
 	public void inicia() {
@@ -63,38 +65,61 @@ public class AgenteBean implements Serializable {
 		this.idMatricula = idMatricula;
 	}
 
+	public Integer getTempoServico() {
+		return tempoServico;
+	}
+
+	public void setTempoServico(Integer tempoServico) {
+		this.tempoServico = tempoServico;
+	}
+
+	public String getDtContratacao() {
+		return dtContratacao;
+	}
+
+	public void setDtContratacao(String dtContratacao) {
+		this.dtContratacao = dtContratacao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public void cadastrarAgente() {
 
 		try {
 			agenteService.incluir(getAgente());
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Agente cadastrado com sucesso!"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Cadastrado com sucesso!"));
 
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Agente não cadastrado!"));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
 
 		this.agente = new Agente();
 	}
 
-	public void alterarAgente() {
+	public void alterarAgente(Integer matricula) {
 
 		/* procurar o id do agente por meio da matrícula antiga */
 		try {
-			Agente a = procurarMatricular(this.idMatricula);
+			Agente a = procurarMatricular(/* this.idMatricula */matricula);
 			a.setNome(this.agente.getNome());
 			a.setDtContratacao(this.agente.getDtContratacao());
 			a.setTempoServico(this.agente.getTempoServico());
 			a.setMatricula(this.agente.getMatricula());
 
-		
 			agenteService.alterar(a);
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Agente alterado com sucesso!"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Alterado com sucesso!"));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Agente não alterado!"));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
 
 		this.agente = new Agente();
@@ -102,22 +127,23 @@ public class AgenteBean implements Serializable {
 
 	}
 
-	public void removerAgente() {
-	
+	public String removerAgente(Integer matricula) {
+
 		try {
-			Agente a = procurarMatricular(this.agente.getMatricula());
+			Agente a = procurarMatricular(matricula);
 			agenteService.remover(a.getIdAgente());
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Atenção", "Agente removido com sucesso!"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Removido com sucesso!"));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Agente não removido!"));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage()));
 		}
 		this.agente = new Agente();
+		return "listarAgente.faces?faces-redirect=true";
 	}
 
 	public String voltar() {
-		return "/index.faces?faces-redirect=true";
+		return "listarAgente.faces?faces-redirect=true";
 
 	}
 
@@ -133,6 +159,16 @@ public class AgenteBean implements Serializable {
 			}
 		}
 		return null;
+	}
+
+	public String recuperaId() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		idMatricula = Integer.parseInt(params.get("matricula"));
+		nome = params.get("nome");
+		tempoServico = Integer.parseInt(params.get("tempoServico"));
+		dtContratacao = params.get("dtContratacao");
+		return "alterarAgente?faces-redirect=true";
 	}
 
 }
